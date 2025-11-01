@@ -18,7 +18,7 @@ function App() {
     const { data, errors } = await client.mutations.addConsts({
       id: "1",
       name: "My Const",
-      value: { foo: "bar" },
+      value: JSON.stringify({ foo: "bar" }),
     });
 
     console.log({ data, errors });
