@@ -12,6 +12,30 @@ const schema = a.schema({
       content: a.string(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
+
+      
+  Consts: a.customType({
+    id: a.id(),
+    name: a.string().required(),
+    value: a.json(),
+  }),
+
+    
+  addConsts: a
+    .mutation()
+    .arguments({
+      id: a.id(),
+      name: a.string().required(),
+      value: a.json(),
+    })
+    .returns(a.ref("Consts"))
+    .authorization(allow => [allow.publicApiKey()])
+    .handler(
+      a.handler.custom({
+        dataSource: "constantsTest",
+        entry: "./addConsts.js",
+      })
+    ),
 });
 
 export type Schema = ClientSchema<typeof schema>;

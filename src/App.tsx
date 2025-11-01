@@ -13,8 +13,16 @@ function App() {
     });
   }, []);
 
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
+  async function createTodo() {
+    console.log(client)
+    const { data, errors } = await client.mutations.addConsts({
+      id: "1",
+      name: "My Const",
+      value: { foo: "bar" },
+    });
+
+    console.log({ data, errors });
+    // client.models.Todo.create({ content: window.prompt("Todo content") });
   }
 
   return (
